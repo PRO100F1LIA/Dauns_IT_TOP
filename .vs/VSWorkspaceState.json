@@ -4,6 +4,10 @@
     "\\game",
     "\\game\\src"
   ],
+<<<<<<< HEAD
   "SelectedNode": "\\game\\BreakingBonds.sln",
+=======
+  "SelectedNode": "\\game\\CMakeLists.txt",
+>>>>>>> 712f7da46027790695ac12259ce92eda94919b24
   "PreviewInSolutionExplorer": false
 }
