@@ -1,0 +1,30 @@
+# Visual Studio
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+[Bb]uild/
+[Bb]in/
+[Oo]bj/
+
+# SFML (не добавляем в репозиторий, нужно скачать отдельно)
+# sfml/
+
+# Temporary files
+*.tmp
+*.log
+*.pdb
+*.ilk
+
+# Compiled files
+*.exe
+*.dll
+*.lib
+
