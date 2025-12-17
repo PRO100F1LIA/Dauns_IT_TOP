@@ -1,5 +1,4 @@
-#include <QApplication>
-#include "UI_MainWindow.h"
+#include "GameWindow.h"
 #include <iostream>
 
 /**
@@ -8,25 +7,19 @@
  * Breaking Bonds - Educational chemistry game inspired by Breaking Bad
  * Learn chemistry through interactive problems and Breaking Bad themed dialogues
  */
-int main(int argc, char *argv[]) {
-    // Set high DPI scaling for better display on modern monitors
-    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
-    
-    QApplication app(argc, argv);
-    app.setApplicationName("Breaking Bonds");
-    app.setApplicationVersion("1.0.0");
-    app.setOrganizationName("Breaking Bonds Studio");
-    
-    // Create and show main window
-    UI_MainWindow window;
-    window.show();
-    
+int main() {
     std::cout << "Breaking Bonds: A Chemistry Chronicle" << std::endl;
     std::cout << "Version 1.0.0" << std::endl;
     std::cout << "Welcome to the lab!" << std::endl;
     
-    return app.exec();
+    try {
+        GameWindow window;
+        window.run();
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 1;
+    }
+    
+    return 0;
 }
-
-
