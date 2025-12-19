@@ -69,8 +69,8 @@ void DialogSystem::initializeDefaultTasks() {
     Task task1;
     task1.level = 1;
     task1.type = TaskType::MOLAR_MASS;
-    task1.description = "Calculate molar mass of water";
-    task1.question = "What is the molar mass of H2O? (in g/mol)";
+    task1.description = "Расчёт молярной массы воды";
+    task1.question = "Найдите молярную массу H2O (в г/моль)";
     task1.formula1 = "H2O";
     task1.answer = std::to_string(ChemistryEngine::calculateMolarMass("H2O"));
     task1.tolerance = 0.1;
@@ -81,8 +81,8 @@ void DialogSystem::initializeDefaultTasks() {
     Task task2;
     task2.level = 2;
     task2.type = TaskType::MOLES_CONVERSION;
-    task2.description = "Convert moles to grams for methamphetamine HI salt";
-    task2.question = "Calculate the mass in grams for 2 moles of C10H15N•HI";
+    task2.description = "Перевод количества вещества в массу";
+    task2.question = "Рассчитайте массу (в граммах) для 2 молей C10H15N•HI";
     task2.formula1 = "C10H15N"; // Simplified - treating as single compound
     // For C10H15N•HI, we approximate: C10H15N (149.23) + HI (127.91) = 277.14 g/mol
     task2.inputValue = 2.0;
@@ -95,8 +95,12 @@ void DialogSystem::initializeDefaultTasks() {
     Task task3;
     task3.level = 3;
     task3.type = TaskType::EQUATION_BALANCE;
-    task3.description = "Balance combustion of propane";
-    task3.question = "Balance: C3H8 + O2 -> CO2 + H2O\nEnter coefficients separated by spaces (C3H8 O2 CO2 H2O):";
+    task3.description = "Балансировка реакции горения пропана";
+    task3.question =
+        "Сбалансируйте уравнение:\n"
+        "C3H8 + O2 -> CO2 + H2O\n"
+        "Введите коэффициенты через пробел (C3H8 O2 CO2 H2O):";
+
     task3.answer = "1 5 3 4"; // C3H8 + 5O2 -> 3CO2 + 4H2O
     task3.tolerance = 0.0;
     task3.dialog = dialogs[3];
@@ -106,8 +110,11 @@ void DialogSystem::initializeDefaultTasks() {
     Task task4;
     task4.level = 4;
     task4.type = TaskType::STOICHIOMETRY;
-    task4.description = "Calculate product yield from benzene nitration";
-    task4.question = "If we have 5 moles of C6H6, how many grams of C6H5NO2 will we get? (1:1 ratio)";
+    task4.description = "Расчёт выхода продукта при нитровании бензола";
+    task4.question =
+        "Если у нас есть 5 моль C6H6, сколько граммов C6H5NO2 мы получим?\n"
+        "Соотношение коэффициентов 1:1";
+
     task4.formula1 = "C6H6";
     task4.formula2 = "C6H5NO2";
     task4.inputValue = 5.0;
@@ -126,8 +133,11 @@ void DialogSystem::initializeDefaultTasks() {
     Task task5;
     task5.level = 5;
     task5.type = TaskType::MOLES_CONVERSION;
-    task5.description = "Calculate pure product mass";
-    task5.question = "Sample: 100g, impurities: 5%. Calculate pure mass in grams:";
+    task5.description = "Расчёт массы чистого продукта";
+    task5.question =
+        "Образец массой 100 г содержит 5% примесей.\n"
+        "Рассчитайте массу чистого вещества (в граммах):";
+
     task5.answer = "95.0";
     task5.tolerance = 0.1;
     task5.dialog = dialogs[5];
@@ -140,15 +150,23 @@ bool DialogSystem::loadFromJSON(const std::string& filename) {
     return true;
 }
 
-Dialog DialogSystem::getDialog(int level) const {
+DialogSystem::Dialog DialogSystem::getDialog(int level) const {
+
     auto it = dialogs.find(level);
     if (it != dialogs.end()) {
         return it->second;
     }
-    return Dialog(Character::WALTER, "Continue...", "Correct!", "Try again.");
+    return Dialog(
+        Character::WALTER,
+        "Продолжай.",
+        "Верно.",
+        "Неправильно. Попробуй ещё раз."
+    );
+
 }
 
-Task DialogSystem::getTask(int level) const {
+DialogSystem::Task DialogSystem::getTask(int level) const {
+
     if (level > 0 && level <= static_cast<int>(tasks.size())) {
         return tasks[level - 1];
     }

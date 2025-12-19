@@ -84,7 +84,10 @@ public:
     static std::string getCharacterGreeting(Character c);
     
     // Get all tasks count
-    int getTaskCount() const { return tasks.size(); }
+    int getTaskCount() const {
+        return static_cast<int>(tasks.size());
+    }
+
 
 private:
     std::vector<Task> tasks;
